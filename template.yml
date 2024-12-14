@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Example Employee Consumer API written with spring-cloud-function web-proxy support
+
+Globals:
+  Api: 
+    OpenApiVersion: '3.0.1'
+Resources:
+  EmployeeConsumerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+#      AutoPublishAlias: bcn
+      FunctionName: employeeConsumer-spring-cloud-function
+      Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest
+      Runtime: java21
+      SnapStart:
+        ApplyOn: PublishedVersions
+      CodeUri: target/payroll-aws-0.0.1-SNAPSHOT-aws.jar
+      MemorySize: 1024
+      Policies: AWSLambdaBasicExecutionRole
+      Timeout: 30
+      Environment:
+        Variables:
+          MAIN_CLASS: com.kubeforce.payrollaws.PayrollAwsApplication
+      Events:
+        ApiEvents:
+          Type: Api
+          Properties:
+            Path: /employeeConsumer
+            Method: POST

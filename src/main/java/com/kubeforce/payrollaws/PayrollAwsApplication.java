@@ -1,6 +1,5 @@
 package com.kubeforce.payrollaws;
-
-import org.springframework.boot.SpringApplication;
+ 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.function.context.FunctionalSpringApplication;
 import org.springframework.context.annotation.Bean;
