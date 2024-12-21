@@ -89,4 +89,11 @@ In Postman, choose POST, the http://localhost:3000/employeeConsumer URL, and the
    "salary":"1000"
 }
 ```
-You'll find the result not good. You maybe need another solution. https://github.com/aws/serverless-java-container/wiki/Quick-start---Spring-Boot3
+You'll find the result not good. 
+* event: 
+  https://stackoverflow.com/questions/73325829/spring-cloud-function-with-aws-api-gateway-and-aws-lambda
+* sulutions ?  
+  * [`org.springframework.cloud.function.adapter.aws.SpringBootApiGatewayRequestHandler`](./https://docs.spring.io/spring-cloud-function/docs/current/reference/html/aws.html#_http_and_api_gateway)
+     * Maybee replace `Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest` in `template.yml` by `Handler: org.springframework.cloud.function.adapter.aws.SpringBootApiGatewayRequestHandler::handleRequest`
+       * But `SpringBootApiGatewayRequestHandler` does not exist !!
+  * You maybe need another solution. https://github.com/aws/serverless-java-container/wiki/Quick-start---Spring-Boot3
